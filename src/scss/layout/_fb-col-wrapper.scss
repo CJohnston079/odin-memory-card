@@ -1,0 +1,58 @@
+@use "../util/" as u;
+
+.fb-col-wrapper {
+	--space-lr: 4rem;
+	--space-gap: 1rem;
+	--col-count: 2;
+
+	display: grid;
+	grid-template-columns:
+		1fr
+		repeat(
+			var(--col-count),
+			calc(
+				(min(100% - var(--space-lr), 80rem) - (var(--col-count) - 1) * var(--space-gap)) /
+					var(--col-count)
+			)
+		)
+		1fr;
+	column-gap: var(--space-gap);
+
+	& > * {
+		grid-column: 2 / -2;
+	}
+
+	&__content {
+		grid-column: 2 / -2;
+
+		@include u.breakpoint(medium) {
+			grid-column: 2 / 5;
+		}
+
+		@include u.breakpoint(large) {
+			grid-column: 2 / 8;
+		}
+	}
+
+	&__image {
+		grid-column: 1 / -1;
+
+		@include u.breakpoint(medium) {
+			grid-column: 5 / -1;
+		}
+
+		@include u.breakpoint(large) {
+			grid-column: 8 / -1;
+		}
+	}
+
+	@include u.breakpoint(medium) {
+		--space-lr: 8rem;
+		--space-gap: 2rem;
+		--col-count: 6;
+	}
+
+	@include u.breakpoint(large) {
+		--col-count: 12;
+	}
+}

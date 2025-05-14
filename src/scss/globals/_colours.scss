@@ -1,0 +1,44 @@
+@use "../util/colour-themes" as theme;
+@use "../util/generate-colour" as colour;
+
+:root {
+	@include colour.generate("primary", 237, 100%, 70%, $tint-multiplier: 1.3);
+	@include colour.generate("secondary", 237, 100%, 70%, $tint-multiplier: 1.3);
+	@include colour.generate("tertiary", 193, 95%, 68%, $tint-multiplier: 1.3);
+	@include colour.generate("success", 140, 100%, 50%);
+	@include colour.generate("warning", 50, 90%, 50%);
+	@include colour.generate("error", 10, 70%, 60%);
+
+	--cl-neutral-hue: 208;
+	--cl-neutral-saturation: 37%;
+	--cl-neutral-000: hsl(var(--cl-neutral-hue), var(--cl-neutral-saturation), 100%);
+	--cl-neutral-100: hsl(var(--cl-neutral-hue), var(--cl-neutral-saturation), 95%);
+	--cl-neutral-200: hsl(var(--cl-neutral-hue), var(--cl-neutral-saturation), 90%);
+	--cl-neutral-300: hsl(var(--cl-neutral-hue), var(--cl-neutral-saturation), 85%);
+	--cl-neutral-400: hsl(var(--cl-neutral-hue), var(--cl-neutral-saturation), 80%);
+	--cl-neutral-500: hsl(var(--cl-neutral-hue), var(--cl-neutral-saturation), 45%);
+	--cl-neutral-600: hsl(var(--cl-neutral-hue), var(--cl-neutral-saturation), 35%);
+	--cl-neutral-700: hsl(var(--cl-neutral-hue), var(--cl-neutral-saturation), 20%);
+	--cl-neutral-800: hsl(var(--cl-neutral-hue), var(--cl-neutral-saturation), 15%);
+	--cl-neutral-900: hsl(var(--cl-neutral-hue), var(--cl-neutral-saturation), 0%);
+
+	color-scheme: light dark;
+}
+
+body {
+	@include theme.light;
+
+	&.dark {
+		@include theme.dark;
+	}
+
+	&.light {
+		@include theme.light;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+		@include theme.dark;
+	}
+}

@@ -1,0 +1,36 @@
+@use "../util/generate-colour" as colour;
+
+@mixin light {
+	--heading-primary: var(--cl-neutral-900);
+	--heading-secondary: var(--cl-secondary-shade);
+	--text-primary: var(--cl-neutral-700);
+	--text-secondary: var(--cl-neutral-600);
+	--link-primary: var(--cl-primary);
+	--background-primary: var(--cl-neutral-000);
+	--background-primary-shade: var(--cl-neutral-100);
+	--background-secondary: var(--cl-neutral-300);
+	--background-secondary-tint: var(--cl-neutral-200);
+	--background-secondary-shade: var(--cl-neutral-400);
+	--midground: var(--cl-neutral-500);
+	--foreground: var(--cl-neutral-800);
+	--foreground-tint: var(--cl-neutral-700);
+	--foreground-shade: var(--cl-neutral-900);
+	--cl-background-trans: hsl(0, 0%, 100%, 0.9);
+}
+
+@mixin dark {
+	--heading-primary: var(--cl-neutral-200);
+	--heading-secondary: var(--cl-secondary);
+	--text-primary: var(--cl-neutral-100);
+	--text-primary-shade: var(--cl-neutral-200);
+	--text-secondary: var(--cl-neutral-400);
+	--background-primary: var(--cl-neutral-800);
+	--background-primary-shade: var(--cl-neutral-900);
+	--background-secondary: var(--cl-neutral-700);
+	--background-secondary-tint: var(--cl-neutral-600);
+	--background-secondary-shade: var(--cl-neutral-800);
+	--midground: var(--cl-neutral-500);
+	--foreground: var(--cl-neutral-100);
+	--foreground-tint: var(--cl-neutral-000);
+	--foreground-shade: var(--cl-neutral-200);
+}

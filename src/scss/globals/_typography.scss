@@ -1,0 +1,36 @@
+@use "/src/scss/util/" as u;
+
+:root {
+	--sans-serif: system-ui, Avenir, Helvetica, Arial, sans-serif;
+	--serif: serif;
+
+	font-style: normal;
+	font-weight: 400;
+	font-optical-sizing: auto;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	line-height: 1.5;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	color: var(--text-primary);
+	font-family: var(--sans-serif);
+}
+
+h1 {
+	font-size: 3.2em;
+	line-height: 1.1;
+}
+
+a {
+	font-weight: 500;
+	color: var(--link-primary);
+	text-decoration: inherit;
+
+	&:hover {
+		color: var(--cl-primary);
+	}
+}

@@ -1,0 +1,27 @@
+@mixin generate(
+	$name,
+	$hue,
+	$saturation,
+	$lightness,
+	$tint-multiplier: 1.2,
+	$shade-multiplier: 0.8
+) {
+	--cl-#{$name}-hue: #{$hue};
+	--cl-#{$name}-saturation: #{$saturation};
+	--cl-#{$name}-lightness: #{$lightness};
+	--cl-#{$name}: hsl(
+		var(--cl-#{$name}-hue),
+		var(--cl-#{$name}-saturation),
+		var(--cl-#{$name}-lightness)
+	);
+	--cl-#{$name}-tint: hsl(
+		var(--cl-#{$name}-hue),
+		var(--cl-#{$name}-saturation),
+		calc(var(--cl-#{$name}-lightness) * #{$tint-multiplier})
+	);
+	--cl-#{$name}-shade: hsl(
+		var(--cl-#{$name}-hue),
+		var(--cl-#{$name}-saturation),
+		calc(var(--cl-#{$name}-lightness) * #{$shade-multiplier})
+	);
+}
