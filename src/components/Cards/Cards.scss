@@ -1,0 +1,18 @@
+@use "@/scss/util" as u;
+
+.cards {
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	gap: u.rem(32);
+
+	@include u.breakpoint(medium) {
+		gap: u.rem(48);
+	}
+
+	@include u.breakpoint(large) {
+		grid-template-columns: repeat(4, auto);
+		gap: u.rem(64);
+	}
+
+	justify-content: center;
+}

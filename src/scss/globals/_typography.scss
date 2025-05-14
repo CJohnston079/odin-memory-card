@@ -21,7 +21,11 @@ body {
 }
 
 h1 {
-	font-size: 3.2em;
+  margin-bottom: u.rem(32);
+  margin-bottom: clamp(u.rem(32), 1.5rem + 2vw, u.rem(48));
+  text-align: center;
+	font-size: u.rem(32);
+  font-size: clamp(u.rem(32), 1.5rem + 2vw, u.rem(48));
 	line-height: 1.1;
 }
 
