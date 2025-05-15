@@ -3,7 +3,7 @@ import { useState } from "react";
 import Cards from "@/components/Cards/Cards";
 import "./Game.scss";
 
-function Root() {
+const Game = () => {
 	const [score, setScore] = useState(0);
 
 	return (
@@ -16,4 +16,4 @@ function Root() {
 	);
 }
 
-export default Root;
+export default Game;

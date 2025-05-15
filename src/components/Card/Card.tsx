@@ -1,17 +1,29 @@
+import { motion, useReducedMotion } from "framer-motion";
 import "./Card.scss";
 
 interface Props {
 	name: string;
+	rotation: number;
 	onClick: () => void;
 }
 
-const Card = function ({ name, onClick }: Props) {
+const Card = function ({ name, rotation, onClick }: Props) {
+	const shouldReduceMotion = useReducedMotion();
 	const isRed = name.includes("♦️") || name.includes("♥️");
 
 	return (
-		<div className={`card ${isRed ? "card--red" : ""}`} onClick={onClick}>
+		<motion.div
+			className={`card ${isRed ? "card--red" : ""}`}
+			onClick={onClick}
+			layout={!shouldReduceMotion}
+			initial={{ rotate: rotation || 0 }}
+			animate={{ rotate: rotation || 0 }}
+			transition={
+				shouldReduceMotion ? { duration: 0 } : { type: "spring", stiffness: 400, damping: 60 }
+			}
+		>
 			<span className="card__text">{name}</span>
-		</div>
+		</motion.div>
 	);
 };
 

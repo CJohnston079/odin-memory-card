@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+
 import Card from "@/components/Card/Card";
 import "./Cards.scss";
 
@@ -12,8 +14,17 @@ type Props = {
 	setScore: React.Dispatch<React.SetStateAction<number>>;
 };
 
+const rotationsA = [-10, 2, 7, -2, 3, -1, -6, 2, -9, -2, 1, 8];
+const rotationsB = [5, -2, -7, 2, -3, 1, 6, -2, 9, 2, -1, -8];
+
 const shuffle = function <T>(cards: T[]): T[] {
-	return [...cards].sort(() => Math.random() - 0.5);
+	const shuffled = [...cards];
+
+	do {
+		shuffled.sort(() => Math.random() - 0.5);
+	} while (shuffled.some((card, i) => card === cards[i]));
+
+	return shuffled;
 };
 
 const generateCards = function () {
@@ -41,6 +52,11 @@ const generateCards = function () {
 const Cards = function ({ score, setScore }: Props) {
 	const [cards, setCards] = useState(generateCards);
 	const [chosenCards, setChosenCards] = useState<number[]>([]);
+	const [rotations, setRotations] = useState(rotationsA);
+
+	const toggleRotations = () => {
+		setRotations(prev => (prev === rotationsA ? rotationsB : rotationsA));
+	};
 
 	const nextRound = function (cardId: number) {
 		setChosenCards([...chosenCards, cardId]);
@@ -55,6 +71,8 @@ const Cards = function ({ score, setScore }: Props) {
 	};
 
 	const handleClick = (card: CardData) => () => {
+		toggleRotations();
+
 		if (!chosenCards.includes(card.id)) {
 			nextRound(card.id);
 		} else {
@@ -64,9 +82,16 @@ const Cards = function ({ score, setScore }: Props) {
 
 	return (
 		<div className="cards">
-			{cards.map((card, i) => (
-				<Card key={i} name={card.name} onClick={handleClick(card)} />
-			))}
+			<AnimatePresence>
+				{cards.map((card, i) => (
+					<Card
+						key={card.id}
+						name={card.name}
+						rotation={rotations[i]}
+						onClick={handleClick(card)}
+					/>
+				))}
+			</AnimatePresence>
 		</div>
 	);
 };

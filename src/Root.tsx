@@ -1,6 +1,6 @@
 import Game from "@/components/Game/Game";
 
-function Root() {
+const Root = () => {
 	return (
 		<main className="main fb-col-wrapper">
 			<header className="main__header">
@@ -9,6 +9,6 @@ function Root() {
 			<Game />
 		</main>
 	);
-}
+};
 
 export default Root;
