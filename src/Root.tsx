@@ -1,4 +1,4 @@
-import Cards from "@/components/Cards/Cards";
+import Game from "@/components/Game/Game";
 
 function Root() {
 	return (
@@ -6,7 +6,7 @@ function Root() {
 			<header className="main__header">
 				<h1 className="main__heading">Memory card</h1>
 			</header>
-			<Cards />
+			<Game />
 		</main>
 	);
 }
