@@ -20,6 +20,9 @@
 	border-color: black;
 	border-radius: var(--card-corner-radius);
 
+  transition-property: opacity;
+  transition-duration: 200ms;
+
 	overflow: hidden;
 
 	@include u.breakpoint(medium) {
@@ -50,4 +53,10 @@
 			color: var(--cl-red);
 		}
 	}
+
+  &--hinted {
+    opacity: 0.3;
+    transition-duration: 800ms;
+    pointer-events: none;
+  }
 }

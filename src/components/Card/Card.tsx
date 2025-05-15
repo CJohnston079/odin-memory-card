@@ -4,16 +4,17 @@ import "./Card.scss";
 interface Props {
 	name: string;
 	rotation: number;
+	hinted: boolean;
 	onClick: () => void;
 }
 
-const Card = function ({ name, rotation, onClick }: Props) {
+const Card = function ({ name, rotation, hinted, onClick }: Props) {
 	const shouldReduceMotion = useReducedMotion();
 	const isRed = name.includes("♦️") || name.includes("♥️");
 
 	return (
 		<motion.div
-			className={`card ${isRed ? "card--red" : ""}`}
+			className={`card ${isRed ? "card--red" : ""} ${hinted ? "card--hinted" : ""}`}
 			onClick={onClick}
 			layout={!shouldReduceMotion}
 			initial={{ rotate: rotation || 0 }}

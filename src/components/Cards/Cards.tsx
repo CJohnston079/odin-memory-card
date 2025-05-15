@@ -11,7 +11,9 @@ type CardData = {
 
 type Props = {
 	score: number;
+	showHint: boolean;
 	setScore: React.Dispatch<React.SetStateAction<number>>;
+	setShowHint: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const rotationsA = [-10, 2, 7, -2, 3, -1, -6, 2, -9, -2, 1, 8];
@@ -49,10 +51,12 @@ const generateCards = function () {
 	return cards;
 };
 
-const Cards = function ({ score, setScore }: Props) {
+const Cards = function ({ score, setScore, showHint, setShowHint }: Props) {
 	const [cards, setCards] = useState(generateCards);
 	const [chosenCards, setChosenCards] = useState<number[]>([]);
 	const [rotations, setRotations] = useState(rotationsA);
+
+	const hintedCards = showHint ? chosenCards.slice(0, Math.ceil(chosenCards.length / 2)) : [];
 
 	const toggleRotations = () => {
 		setRotations(prev => (prev === rotationsA ? rotationsB : rotationsA));
@@ -62,12 +66,14 @@ const Cards = function ({ score, setScore }: Props) {
 		setChosenCards([...chosenCards, cardId]);
 		setScore(score + 1);
 		setCards(shuffle(cards));
+		setShowHint(false);
 	};
 
 	const resetGame = function () {
 		setScore(0);
 		setChosenCards([]);
 		setCards(generateCards);
+		setShowHint(false);
 	};
 
 	const handleClick = (card: CardData) => () => {
@@ -88,6 +94,7 @@ const Cards = function ({ score, setScore }: Props) {
 						key={card.id}
 						name={card.name}
 						rotation={rotations[i]}
+						hinted={hintedCards.includes(card.id)}
 						onClick={handleClick(card)}
 					/>
 				))}
