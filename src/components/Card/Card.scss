@@ -6,14 +6,6 @@
 	--card-width: calc(var(--multiplier) * 64px);
 	--card-corner-radius: calc(var(--multiplier) * 3.5px);
 
-	@include u.breakpoint(medium) {
-		--multiplier: 1.8;
-	}
-
-	@include u.breakpoint(large) {
-		--multiplier: 2.4;
-	}
-
 	display: flex;
 
 	border-style: solid;
@@ -29,6 +21,14 @@
 	border-radius: var(--card-corner-radius);
 
 	overflow: hidden;
+
+	@include u.breakpoint(medium) {
+		--multiplier: 1.8;
+	}
+
+	@include u.breakpoint(large) {
+		--multiplier: 2.4;
+	}
 
 	&__text {
 		margin: auto;
