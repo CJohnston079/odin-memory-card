@@ -5,16 +5,19 @@ interface Props {
 	name: string;
 	rotation: number;
 	hinted: boolean;
+	isActive: boolean;
 	onClick: () => void;
 }
 
-const Card = function ({ name, rotation, hinted, onClick }: Props) {
+const Card = function ({ name, rotation, hinted, isActive = false, onClick }: Props) {
 	const shouldReduceMotion = useReducedMotion();
 	const isRed = name.includes("♦️") || name.includes("♥️");
 
 	return (
 		<motion.div
-			className={`card ${isRed ? "card--red" : ""} ${hinted ? "card--hinted" : ""}`}
+			className={`card ${isRed ? "card--red" : ""} ${hinted ? "card--hinted" : ""} ${
+				!isActive ? "card--inactive" : ""
+			}`}
 			onClick={onClick}
 			layout={!shouldReduceMotion}
 			initial={{ rotate: rotation || 0 }}

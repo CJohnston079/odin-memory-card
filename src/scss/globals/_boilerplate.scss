@@ -1,5 +1,12 @@
 body {
+  margin: 0;
 	background-color: var(--background-primary-shade);
+}
+
+
+main {
+  min-height: 100vh;
+  grid-template-rows: auto auto 1fr;
 }
 
 button {

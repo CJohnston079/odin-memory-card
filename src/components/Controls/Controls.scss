@@ -1,9 +1,9 @@
 @use "@/scss/util" as u;
 
-.menu {
+.controls {
 	display: flex;
 	justify-content: space-between;
-  gap: u.rem(16);
+	gap: u.rem(16);
 
 	margin-block-end: u.rem(48);
 

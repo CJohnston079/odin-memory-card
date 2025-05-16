@@ -59,4 +59,12 @@
     transition-duration: 800ms;
     pointer-events: none;
   }
+
+  &--inactive {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    justify-self: center;
+    align-self: center;
+    pointer-events: none;
+  }
 }
