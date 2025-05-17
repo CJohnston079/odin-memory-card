@@ -23,10 +23,24 @@ body {
 h1 {
   margin-bottom: u.rem(32);
   margin-bottom: clamp(u.rem(32), 1.5rem + 2vw, u.rem(48));
-  text-align: center;
+
 	font-size: u.rem(32);
   font-size: clamp(u.rem(32), 1.5rem + 2vw, u.rem(48));
+  text-align: center;
 	line-height: 1.1;
+}
+
+h2 {
+  margin: 0;
+	font-size: u.rem(24);
+  font-size: clamp(u.rem(24), 1.3rem + 1vw, u.rem(40));
+  text-align: center;
+	line-height: 1.1;
+}
+
+p {
+  font-size: u.rem(16);
+  font-size: clamp(u.rem(16), 0.9rem + 0.5vw, u.rem(24));
 }
 
 a {

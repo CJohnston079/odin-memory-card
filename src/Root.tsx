@@ -1,14 +1,14 @@
-import Cards from "@/components/Cards/Cards";
+import Game from "@/components/Game/Game";
 
-function Root() {
+const Root = () => {
 	return (
 		<main className="main fb-col-wrapper">
 			<header className="main__header">
 				<h1 className="main__heading">Memory card</h1>
 			</header>
-			<Cards />
+			<Game />
 		</main>
 	);
-}
+};
 
 export default Root;

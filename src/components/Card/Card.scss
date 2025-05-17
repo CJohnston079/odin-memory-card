@@ -6,14 +6,6 @@
 	--card-width: calc(var(--multiplier) * 64px);
 	--card-corner-radius: calc(var(--multiplier) * 3.5px);
 
-	@include u.breakpoint(medium) {
-		--multiplier: 1.8;
-	}
-
-	@include u.breakpoint(large) {
-		--multiplier: 2.4;
-	}
-
 	display: flex;
 
 	border-style: solid;
@@ -28,7 +20,18 @@
 	border-color: black;
 	border-radius: var(--card-corner-radius);
 
+  transition-property: opacity;
+  transition-duration: 200ms;
+
 	overflow: hidden;
+
+	@include u.breakpoint(medium) {
+		--multiplier: 1.8;
+	}
+
+	@include u.breakpoint(large) {
+		--multiplier: 2.4;
+	}
 
 	&__text {
 		margin: auto;
@@ -50,4 +53,18 @@
 			color: var(--cl-red);
 		}
 	}
+
+  &--hinted {
+    opacity: 0.3;
+    transition-duration: 800ms;
+    pointer-events: none;
+  }
+
+  &--inactive {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    justify-self: center;
+    align-self: center;
+    pointer-events: none;
+  }
 }

@@ -1,30 +1,44 @@
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import type { CardData } from "@/types/CardData";
+
 import Card from "@/components/Card/Card";
 import "./Cards.scss";
 
-const suits = ["♣️", "♦️", "♥️", "♠️"];
-const values = Array.from({ length: 9 }, (_, i) => i + 1);
+type Props = {
+	cards: CardData[];
+	onCardClick: (cardId: number) => void;
+	hintedIds: number[];
+	isPlaying: boolean;
+};
 
-const deck = [];
+const rotationsA = [-10, 2, 7, -2, 3, -1, -6, 2, -9, -2, 1, 8];
+const rotationsB = [5, -2, -7, 2, -3, 1, 6, -2, 9, 2, -1, -8];
 
-for (const suit of suits) {
-	for (const value of values) {
-		deck.push(`${value} ${suit}`);
-	}
-}
+const Cards = ({ cards, onCardClick, hintedIds, isPlaying }: Props) => {
+	const [rotations, setRotations] = useState(rotationsA);
 
-const shuffledDeck = deck.sort(() => Math.random() - 0.5);
+	const toggleRotations = () => {
+		setRotations(prev => (prev === rotationsA ? rotationsB : rotationsA));
+	};
 
-const cards = Array.from({ length: 12 }, (_, i) => ({
-	id: i,
-	name: shuffledDeck[i],
-}));
-
-const Cards = function () {
 	return (
 		<div className="cards">
-			{cards.map(card => (
-				<Card key={card.id} name={card.name} />
-			))}
+			<AnimatePresence>
+				{cards.map((card, i) => (
+					<Card
+						key={card.id}
+						name={card.name}
+						rotation={rotations[i % rotations.length]}
+						hinted={hintedIds.includes(card.id)}
+						isActive={isPlaying}
+						onClick={() => {
+							onCardClick(card.id);
+							toggleRotations();
+						}}
+					/>
+				))}
+			</AnimatePresence>
 		</div>
 	);
 };

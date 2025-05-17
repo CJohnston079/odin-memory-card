@@ -1,0 +1,39 @@
+@use "@/scss/util" as u;
+
+.controls {
+	display: flex;
+	justify-content: space-between;
+	gap: u.rem(16);
+
+	margin-block-end: u.rem(48);
+
+	&__buttons {
+		display: flex;
+		gap: u.rem(16);
+	}
+
+	&__item {
+		border-style: solid;
+		border-width: 1px;
+		padding: u.rem(8) u.rem(16);
+
+		text-align: center;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+
+		color: var(--text-primary);
+		background-color: var(--background-primary);
+		border-color: var(--foreground-tint);
+		border-radius: 8px;
+
+		&--button {
+			display: block;
+		}
+	}
+
+	&__score-value {
+		display: inline-block;
+		min-width: 2ch;
+		font-weight: 900;
+	}
+}

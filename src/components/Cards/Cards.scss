@@ -4,6 +4,7 @@
 	display: grid;
 	grid-template-columns: repeat(3, auto);
 	gap: u.rem(32);
+  justify-content: center;
 
 	@include u.breakpoint(medium) {
 		gap: u.rem(48);
@@ -13,6 +14,4 @@
 		grid-template-columns: repeat(4, auto);
 		gap: u.rem(64);
 	}
-
-	justify-content: center;
 }
