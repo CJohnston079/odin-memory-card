@@ -1,6 +1,9 @@
 import { useState, useCallback } from "react";
+import { AnimatePresence } from "framer-motion";
+
 import Controls from "../Controls/Controls";
 import Cards from "@/components/Cards/Cards";
+import Menu from "../Menu/Menu";
 import { generateCards, shuffle } from "@/components/Cards/cardUtils";
 import "./Game.scss";
 
@@ -26,12 +29,20 @@ const Game = () => {
 		setShowHint(false);
 	}, []);
 
-	const nextRound = useCallback((cardId: number) => {
-		setChosenCards(prev => [...prev, cardId]);
-		setScore(prev => prev + 1);
-		setCards(prev => shuffle(prev));
-		setShowHint(false);
-	}, []);
+	const nextRound = useCallback(
+		(cardId: number) => {
+			setChosenCards(prev => [...prev, cardId]);
+			setScore(prev => prev + 1);
+
+			if (score === cards.length - 1) {
+				endGame();
+			}
+
+			setCards(prev => shuffle(prev));
+			setShowHint(false);
+		},
+		[score, cards.length, endGame]
+	);
 
 	const handleCardClick = (cardId: number) => {
 		if (!isPlaying) return;
@@ -45,7 +56,10 @@ const Game = () => {
 
 	return (
 		<>
-			<Controls score={score} setShowHint={setShowHint} startNewGame={startGame} />
+			<AnimatePresence>
+				{!isPlaying && <Menu score={score} startNewGame={startGame} />}
+			</AnimatePresence>
+			<Controls score={score} setShowHint={setShowHint} endGame={endGame} />
 			<Cards
 				cards={cards}
 				onCardClick={handleCardClick}

@@ -3,10 +3,10 @@ import "./Controls.scss";
 type Props = {
 	score: number;
 	setShowHint: React.Dispatch<React.SetStateAction<boolean>>;
-	startNewGame: () => void;
+	endGame: () => void;
 };
 
-const Conrols = ({ score, setShowHint, startNewGame }: Props) => {
+const Conrols = ({ score, setShowHint, endGame }: Props) => {
 	const block = "controls";
 
 	return (
@@ -15,9 +15,9 @@ const Conrols = ({ score, setShowHint, startNewGame }: Props) => {
 				<button
 					type="button"
 					className={`${block}__item ${block}__item--button`}
-					onClick={() => startNewGame()}
+					onClick={() => endGame()}
 				>
-					New game
+					End game
 				</button>
 				<button
 					type="button"
