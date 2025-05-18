@@ -7,15 +7,15 @@ import "./Cards.scss";
 
 type Props = {
 	cards: CardData[];
-	onCardClick: (cardId: number) => void;
-	hintedIds: number[];
+	onCardClick: (code: string) => void;
+	hintedCodes: string[];
 	isPlaying: boolean;
 };
 
 const rotationsA = [-10, 2, 7, -2, 3, -1, -6, 2, -9, -2, 1, 8];
 const rotationsB = [5, -2, -7, 2, -3, 1, 6, -2, 9, 2, -1, -8];
 
-const Cards = ({ cards, onCardClick, hintedIds, isPlaying }: Props) => {
+const Cards = ({ cards, onCardClick, hintedCodes, isPlaying }: Props) => {
 	const [rotations, setRotations] = useState(rotationsA);
 
 	const toggleRotations = () => {
@@ -27,13 +27,13 @@ const Cards = ({ cards, onCardClick, hintedIds, isPlaying }: Props) => {
 			<AnimatePresence>
 				{cards.map((card, i) => (
 					<Card
-						key={card.id}
-						name={card.name}
+						key={card.code}
+						card={card}
 						rotation={rotations[i % rotations.length]}
-						hinted={hintedIds.includes(card.id)}
+						hinted={hintedCodes.includes(card.code)}
 						isActive={isPlaying}
 						onClick={() => {
-							onCardClick(card.id);
+							onCardClick(card.code);
 							toggleRotations();
 						}}
 					/>

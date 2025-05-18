@@ -4,21 +4,12 @@
 	--multiplier: 1.2;
 	--card-height: calc(var(--multiplier) * 89px);
 	--card-width: calc(var(--multiplier) * 64px);
-	--card-corner-radius: calc(var(--multiplier) * 3.5px);
 
-	display: flex;
-
-	border-style: solid;
-	border-width: u.rem(3);
-	border-width: clamp(u.rem(3), 0.15625rem + 0.125vw, u.rem(4));
 	width: var(--card-width);
 	height: var(--card-height);
 	max-width: 300px;
 
 	color: black;
-	background-color: white;
-	border-color: black;
-	border-radius: var(--card-corner-radius);
 
   transition-property: opacity;
   transition-duration: 200ms;
@@ -33,26 +24,9 @@
 		--multiplier: 2.4;
 	}
 
-	&__text {
-		margin: auto;
-
-		font-size: u.rem(16);
-		font-size: clamp(u.rem(16), 0.5rem + 2vw, u.rem(32));
-		font-weight: 900;
-		text-align: center;
-		width: 100%;
-	}
-
-	&--red {
-		--cl-red: hsl(0, 84%, 39%);
-		--cl-red-trans: hsl(0, 84%, 39%, 0.5);
-
-		border-color: var(--cl-red);
-
-		& .card__text {
-			color: var(--cl-red);
-		}
-	}
+  &__image {
+    width: 100%;
+  }
 
   &--hinted {
     opacity: 0.3;
