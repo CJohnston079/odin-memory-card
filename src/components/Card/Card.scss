@@ -35,10 +35,7 @@
   }
 
   &--inactive {
-    grid-column: 1 / -1;
-    grid-row: 1 / -1;
-    justify-self: center;
-    align-self: center;
+    position: absolute;
     pointer-events: none;
   }
 }

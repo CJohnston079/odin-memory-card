@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import type { CardData } from "@/types/CardData";
 import "./Card.scss";
@@ -10,12 +11,17 @@ interface Props {
 	onClick: () => void;
 }
 
+import cardBack from "@/assets/images/card-back.png";
+
 const Card = function ({ card, rotation, hinted, isActive = false, onClick }: Props) {
+	const [imageLoaded, setImageLoaded] = useState(false);
 	const shouldReduceMotion = useReducedMotion();
 
 	return (
 		<motion.div
-			className={`card ${hinted ? "card--hinted" : ""} ${!isActive ? "card--inactive" : ""}`}
+			className={`card ${hinted ? "card--hinted" : ""} ${
+				!isActive || !imageLoaded ? "card--inactive" : ""
+			}`}
 			onClick={onClick}
 			layout={!shouldReduceMotion}
 			initial={{ rotate: rotation || 0 }}
@@ -26,9 +32,10 @@ const Card = function ({ card, rotation, hinted, isActive = false, onClick }: Pr
 		>
 			<img
 				key={card.code}
-				src={card.images.png}
+				src={imageLoaded ? card.images.png : cardBack}
 				alt={`${card.value} of ${card.suit}`}
 				className="card__image"
+				onLoad={() => setImageLoaded(true)}
 			/>
 		</motion.div>
 	);

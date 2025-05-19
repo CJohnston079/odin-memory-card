@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion";
 
 import Controls from "../Controls/Controls";
 import Cards from "@/components/Cards/Cards";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import Menu from "../Menu/Menu";
 import { shuffle } from "@/components/Cards/cardUtils";
 import "./Game.scss";
@@ -95,7 +96,7 @@ const Game = () => {
 			{error ? (
 				<p>{error}</p>
 			) : loading ? (
-				<p>{loading}</p>
+				<LoadingSpinner />
 			) : (
 				<Cards
 					cards={cards}
