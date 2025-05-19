@@ -1,0 +1,31 @@
+.loading-spinner {
+	position: relative;
+	margin: auto;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		width: 4rem;
+		height: 4rem;
+
+		border-style: dashed;
+		border-width: 4px;
+		border-color: var(--foreground-shade);
+		border-radius: 50%;
+
+		animation: spin 2000ms ease-in-out infinite;
+	}
+}
+
+@keyframes spin {
+	from {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	to {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
