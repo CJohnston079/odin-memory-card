@@ -6,6 +6,7 @@ import Cards from "@/components/Cards";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Menu from "@/components/Menu";
 
+import { getNewDeck } from "@/services/deckService";
 import { gameReducer, initialState } from "./gameReducer";
 import "./Game.scss";
 
@@ -19,13 +20,7 @@ const Game = () => {
 	const fetchNewCards = useCallback(async () => {
 		try {
 			dispatch({ type: "FETCH_START" });
-
-			const deckRes = await fetch(NEW_DECK_API);
-			const deckData = await deckRes.json();
-
-			const drawRes = await fetch(`${DECK_API}/${deckData.deck_id}/draw/?count=12`);
-			const drawData = await drawRes.json();
-
+			const drawData = await getNewDeck(NEW_DECK_API, DECK_API);
 			dispatch({ type: "FETCH_SUCCESS", cards: drawData.cards });
 		} catch (err) {
 			dispatch({ type: "FETCH_ERROR", error: `Failed to fetch cards. ${err}` });
