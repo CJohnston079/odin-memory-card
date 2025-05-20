@@ -3,9 +3,9 @@
 .cards {
 	display: flex;
   flex-wrap: wrap;
-	gap: u.rem(32);
+	gap: u.rem(16);
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   position: relative;
 

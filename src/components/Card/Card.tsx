@@ -32,7 +32,7 @@ const Card = function ({ card, rotation, hinted, isActive = false, onClick }: Pr
 		>
 			<img
 				key={card.code}
-				src={imageLoaded ? card.images.png : cardBack}
+				src={imageLoaded ? card.image : cardBack}
 				alt={`${card.value} of ${card.suit}`}
 				className="card__image"
 				onLoad={() => setImageLoaded(true)}
