@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useCallback, useEffect, useReducer, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 
 import Controls from "@/components/Controls";
@@ -6,40 +6,29 @@ import Cards from "@/components/Cards";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Menu from "@/components/Menu";
 
-import { shuffle } from "@/components/Cards/cardUtils";
+import { gameReducer, initialState } from "./gameReducer";
 import "./Game.scss";
 
 const NEW_DECK_API = import.meta.env.VITE_CMS_NEW_DECK_API;
 const DECK_API = import.meta.env.VITE_CMS_DECK_API;
 
 const Game = () => {
-	const [cards, setCards] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState<string | null>(null);
-	const [score, setScore] = useState(0);
-	const [showHint, setShowHint] = useState(false);
-	const [chosenCards, setChosenCards] = useState<string[]>([]);
-	const [isPlaying, setIsPlaying] = useState(true);
+	const [state, dispatch] = useReducer(gameReducer, initialState);
 	const hasFetchedRef = useRef(false);
-
-	const hintedCodes: string[] = showHint
-		? chosenCards.slice(0, Math.ceil(chosenCards.length / 2))
-		: [];
 
 	const fetchNewCards = useCallback(async () => {
 		try {
-			setLoading(true);
+			dispatch({ type: "FETCH_START" });
+
 			const deckRes = await fetch(NEW_DECK_API);
 			const deckData = await deckRes.json();
 
 			const drawRes = await fetch(`${DECK_API}/${deckData.deck_id}/draw/?count=12`);
 			const drawData = await drawRes.json();
 
-			setCards(drawData.cards);
+			dispatch({ type: "FETCH_SUCCESS", cards: drawData.cards });
 		} catch (err) {
-			setError(`Failed to fetch cards. ${err}`);
-		} finally {
-			setLoading(false);
+			dispatch({ type: "FETCH_ERROR", error: `Failed to fetch cards. ${err}` });
 		}
 	}, []);
 
@@ -51,59 +40,54 @@ const Game = () => {
 	}, [fetchNewCards]);
 
 	const startGame = useCallback(() => {
-		setScore(0);
-		setChosenCards([]);
-		setShowHint(false);
-		setIsPlaying(true);
+		if (state.loading) {
+			return;
+		}
+
+		dispatch({ type: "START_GAME" });
 		fetchNewCards();
-	}, [fetchNewCards]);
+	}, [fetchNewCards, state.loading]);
 
-	const endGame = useCallback(() => {
-		setIsPlaying(false);
-		setShowHint(false);
-	}, []);
+	const endGame = () => {
+		dispatch({ type: "END_GAME" });
+	};
 
-	const nextRound = useCallback(
-		(code: string) => {
-			setChosenCards(prev => [...prev, code]);
-			setScore(prev => prev + 1);
-
-			if (score === cards.length - 1) {
-				endGame();
-			}
-
-			setCards(prev => shuffle(prev));
-			setShowHint(false);
-		},
-		[score, cards.length, endGame]
-	);
+	const showHint = () => {
+		dispatch({ type: "SHOW_HINT" });
+	};
 
 	const handleCardClick = (code: string) => {
-		if (!isPlaying) return;
-
-		if (!chosenCards.includes(code)) {
-			nextRound(code);
-		} else {
-			endGame();
+		if (!state.isPlaying) {
+			return;
 		}
+
+		if (state.chosenCards.includes(code)) {
+			dispatch({ type: "END_GAME" });
+		} else {
+			dispatch({ type: "NEXT_ROUND", code });
+		}
+	};
+
+	const getHintedCodes = (cards: string[], showHint: boolean): string[] => {
+		return showHint ? cards.slice(0, Math.ceil(cards.length / 2)) : [];
 	};
 
 	return (
 		<>
 			<AnimatePresence>
-				{!isPlaying && <Menu score={score} startNewGame={startGame} />}
+				{!state.isPlaying && <Menu score={state.score} startNewGame={startGame} />}
 			</AnimatePresence>
-			<Controls score={score} setShowHint={setShowHint} endGame={endGame} />
-			{error ? (
-				<p>{error}</p>
-			) : loading ? (
+			<Controls score={state.score} setShowHint={showHint} endGame={endGame} />
+			{state.error ? (
+				<p>{state.error}</p>
+			) : state.loading ? (
 				<LoadingSpinner />
 			) : (
 				<Cards
-					cards={cards}
+					cards={state.cards}
 					onCardClick={handleCardClick}
-					hintedCodes={hintedCodes}
-					isPlaying={isPlaying}
+					hintedCodes={getHintedCodes(state.chosenCards, state.showHint)}
+					isPlaying={state.isPlaying}
 				/>
 			)}
 		</>
