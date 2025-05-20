@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 
-import Controls from "../Controls/Controls";
-import Cards from "@/components/Cards/Cards";
-import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import Menu from "../Menu/Menu";
+import Controls from "@/components/Controls";
+import Cards from "@/components/Cards";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import Menu from "@/components/Menu";
+
 import { shuffle } from "@/components/Cards/cardUtils";
 import "./Game.scss";
 
