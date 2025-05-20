@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import type { CardData } from "@/types/CardData";
 
-import Card from "@/components/Card/Card";
+import Card from "@/components/Card";
 import "./Cards.scss";
 
 type Props = {
