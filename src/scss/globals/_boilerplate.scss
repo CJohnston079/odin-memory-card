@@ -1,12 +1,18 @@
+@use "@/scss/util" as u;
+
 body {
   margin: 0;
-	background-color: var(--background-primary-shade);
+  background-image: (
+    radial-gradient(hsl(140, 80%, 30%, 0.8) 20%,  hsl(140, 80%, 20%, 0.8) 85%, hsl(140, 80%, 10%, 0.7)),
+    url("@/assets/images/background.webp"),
+    linear-gradient(#067971)
+  );
+  background-size: cover;
 }
 
-
 main {
-  min-height: 100vh;
-  grid-template-rows: auto auto 1fr;
+  height: 100vh;
+  height: 100dvh;
 }
 
 button {
@@ -38,4 +44,9 @@ img {
   display: block;
   width: 100%;
   height: auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
 }

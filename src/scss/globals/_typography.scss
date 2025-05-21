@@ -2,7 +2,7 @@
 
 :root {
 	--sans-serif: system-ui, Avenir, Helvetica, Arial, sans-serif;
-	--serif: serif;
+	--serif: "Arbutus Slab", serif;;
 
 	font-style: normal;
 	font-weight: 400;
@@ -16,17 +16,16 @@
 }
 
 body {
-	color: var(--text-primary);
-	font-family: var(--sans-serif);
+	color: var(--cl-secondary);
+	font-family: var(--serif);
 }
 
 h1 {
-  margin-bottom: u.rem(32);
-  margin-bottom: clamp(u.rem(32), 1.5rem + 2vw, u.rem(48));
-
-	font-size: u.rem(32);
-  font-size: clamp(u.rem(32), 1.5rem + 2vw, u.rem(48));
+  margin: 0;
+  font-size: u.rem(28);
+  font-size: clamp(u.rem(28), 1.375rem + 1.5vw, u.rem(40));
   text-align: center;
+  text-transform: uppercase;
 	line-height: 1.1;
 }
 
@@ -38,17 +37,9 @@ h2 {
 	line-height: 1.1;
 }
 
-p {
+p,
+button,
+output {
   font-size: u.rem(16);
   font-size: clamp(u.rem(16), 0.9rem + 0.5vw, u.rem(24));
-}
-
-a {
-	font-weight: 500;
-	color: var(--link-primary);
-	text-decoration: inherit;
-
-	&:hover {
-		color: var(--cl-primary);
-	}
 }

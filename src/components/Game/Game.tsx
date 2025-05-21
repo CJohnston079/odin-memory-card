@@ -8,6 +8,7 @@ import Menu from "@/components/Menu";
 
 import { getNewDeck } from "@/services/deckService";
 import { gameReducer, initialState } from "./gameReducer";
+
 import "./Game.scss";
 
 const NEW_DECK_API = import.meta.env.VITE_CMS_NEW_DECK_API;
@@ -72,19 +73,28 @@ const Game = () => {
 			<AnimatePresence>
 				{!state.isPlaying && <Menu score={state.score} startNewGame={startGame} />}
 			</AnimatePresence>
-			<Controls score={state.score} setShowHint={showHint} endGame={endGame} />
-			{state.error ? (
-				<p>{state.error}</p>
-			) : state.loading ? (
-				<LoadingSpinner />
-			) : (
-				<Cards
-					cards={state.cards}
-					onCardClick={handleCardClick}
-					hintedCodes={getHintedCodes(state.chosenCards, state.showHint)}
-					isPlaying={state.isPlaying}
-				/>
-			)}
+			<div className="game">
+				<header className="game__header">
+					<h1 className="game__heading">Memory card</h1>
+				</header>
+				<section className="game__main">
+					{state.error ? (
+						<p>{state.error}</p>
+					) : state.loading ? (
+						<LoadingSpinner />
+					) : (
+						<Cards
+							cards={state.cards}
+							onCardClick={handleCardClick}
+							hintedCodes={getHintedCodes(state.chosenCards, state.showHint)}
+							isPlaying={state.isPlaying}
+						/>
+					)}
+				</section>
+				<footer className="game__footer">
+					<Controls score={state.score} setShowHint={showHint} endGame={endGame} />
+				</footer>
+			</div>
 		</>
 	);
 };

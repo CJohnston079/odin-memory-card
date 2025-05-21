@@ -11,25 +11,30 @@ const Conrols = ({ score, setShowHint, endGame }: Props) => {
 
 	return (
 		<nav className={`${block}`}>
-			<div className={`${block}__buttons`}>
+			<ul className={`${block}__list ${block}__list--buttons`}>
 				<button
 					type="button"
-					className={`${block}__item ${block}__item--button`}
+					className={`${block}__list-item ${block}__list-item--button`}
 					onClick={() => endGame()}
 				>
-					End game
+					Retire
 				</button>
 				<button
 					type="button"
-					className={`${block}__item ${block}__item--button`}
+					className={`${block}__list-item ${block}__list-item--button`}
 					onClick={() => setShowHint(true)}
 				>
 					Hint
 				</button>
-			</div>
-			<output className={`${block}__item ${block}__item--score`}>
-				Score: <span className={`${block}__score-value`}>{score}</span>
-			</output>
+			</ul>
+			<ul className={`${block}__list ${block}__list--score`}>
+				<output className={`${block}__list-item ${block}__list-item--score`}>
+					Highest score: <span className={`${block}__score-value`}>{score}</span>
+				</output>
+				<output className={`${block}__list-item ${block}__list-item--score`}>
+					Score: <span className={`${block}__score-value`}>{score}</span>
+				</output>
+			</ul>
 		</nav>
 	);
 };

@@ -12,17 +12,19 @@
   border-width: clamp(4px, 0.1375rem + 0.5vw, 8px);
   
   border-radius: 12px;
-  border-radius: clamp(6px, 0.75vw, 12px);
+  border-radius: clamp(4px, 0.1375rem + 0.5vw, 8px);
 	overflow: hidden;
 
   background-color: white;
   border-color: white;
 
+  box-shadow: 2px 2px 1px hsl(0, 0%, 0%, 0.5);
+
   transition-property: opacity;
   transition-duration: 200ms;
 
   &__image {
-    transform: scale(1.03);
+    transform: scale(1.05);
   }
 
   &--hinted {

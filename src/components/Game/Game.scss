@@ -1,0 +1,25 @@
+@use "@/scss/util" as u;
+
+.game {
+  margin-block: u.rem(32);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: u.rem(32);
+
+  &__header,
+  &__footer {
+    box-sizing: border-box;
+    border: solid 3px var(--cl-secondary);
+    padding: u.rem(16) u.rem(32);
+    border-radius: 4px;
+  }
+  
+  &__main {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
