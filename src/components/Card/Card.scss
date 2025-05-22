@@ -5,7 +5,7 @@
 
   min-width: 80px;
   max-width: 160px;
-  width: clamp(80px, 2.75rem + 10vw, 160px);
+  width: clamp(80px, 2.75rem + min(10vw, 10vh), 160px);
 
   border-style: solid;
   border-width: 8px;
@@ -18,7 +18,7 @@
   background-color: white;
   border-color: white;
 
-  box-shadow: 2px 2px 1px hsl(0, 0%, 0%, 0.5);
+  box-shadow: 2px 2px 1px hsl(140, 80%, 10%, 0.5);
 
   transition-property: opacity;
   transition-duration: 200ms;
@@ -36,9 +36,7 @@
   }
 
   &--inactive {
+    position: absolute;
     pointer-events: none;
-    // transform: translate(50%, 0) !important;
-    grid-column: 1;
-    grid-row: 1;
   }
 }

@@ -1,17 +1,17 @@
 @use "@/scss/util" as u;
 
 .cards {
-	display: grid;
-  grid-template-columns: repeat(auto-fit, clamp(80px, 2.75rem + 10vw, 160px));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  justify-items: center;
-  align-content: center;
+  align-items: center;
 	gap: u.rem(16);
 
   position: absolute;
   inset: 0;
-  // width: 100%;/
-  // height: 100%;
+
+  height: fit-content;
+  margin: auto;
 
 	@include u.breakpoint(medium) {
 		gap: u.rem(48);
@@ -24,6 +24,6 @@
 
   &--inactive {
     pointer-events: none;
-    grid-template-columns: auto;
+    // grid-template-columns: auto;
   }
 }

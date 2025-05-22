@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion";
 
 import Controls from "@/components/Controls";
 import Cards from "@/components/Cards";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import Loader from "@/components/Loader";
 import Menu from "@/components/Menu";
 
 import { getNewDeck } from "@/services/deckService";
@@ -75,21 +75,26 @@ const Game = () => {
 					<h1 className="game__heading">Memory card</h1>
 				</header>
 				<section className="game__main">
-					<AnimatePresence>
-						{!state.isPlaying && <Menu score={state.score} startNewGame={startGame} />}
+					<AnimatePresence mode="wait">
+						{state.loading ? (
+							<Loader key="loading" />
+						) : state.error ? (
+							<p key="error">{state.error}</p>
+						) : (
+							<>
+								{!state.isPlaying && (
+									<Menu key="menu" score={state.score} startNewGame={startGame} />
+								)}
+								<Cards
+									key="cards"
+									cards={state.cards}
+									onCardClick={handleCardClick}
+									hintedCodes={getHintedCodes(state.chosenCards, state.showHint)}
+									isPlaying={state.isPlaying}
+								/>
+							</>
+						)}
 					</AnimatePresence>
-					{state.error ? (
-						<p>{state.error}</p>
-					) : state.loading ? (
-						<LoadingSpinner />
-					) : (
-						<Cards
-							cards={state.cards}
-							onCardClick={handleCardClick}
-							hintedCodes={getHintedCodes(state.chosenCards, state.showHint)}
-							isPlaying={state.isPlaying}
-						/>
-					)}
 				</section>
 				<footer className="game__footer">
 					<Controls
