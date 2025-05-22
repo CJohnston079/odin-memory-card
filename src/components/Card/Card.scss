@@ -36,7 +36,9 @@
   }
 
   &--inactive {
-    position: absolute;
     pointer-events: none;
+    // transform: translate(50%, 0) !important;
+    grid-column: 1;
+    grid-row: 1;
   }
 }

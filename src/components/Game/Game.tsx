@@ -70,14 +70,14 @@ const Game = () => {
 
 	return (
 		<>
-			<AnimatePresence>
-				{!state.isPlaying && <Menu score={state.score} startNewGame={startGame} />}
-			</AnimatePresence>
 			<div className="game">
 				<header className="game__header">
 					<h1 className="game__heading">Memory card</h1>
 				</header>
 				<section className="game__main">
+					<AnimatePresence>
+						{!state.isPlaying && <Menu score={state.score} startNewGame={startGame} />}
+					</AnimatePresence>
 					{state.error ? (
 						<p>{state.error}</p>
 					) : state.loading ? (

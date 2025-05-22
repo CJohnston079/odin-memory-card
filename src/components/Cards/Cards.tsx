@@ -23,7 +23,7 @@ const Cards = ({ cards, onCardClick, hintedCodes, isPlaying }: Props) => {
 	};
 
 	return (
-		<div className="cards">
+		<div className={`cards ${!isPlaying ? "cards--inactive" : ""}`}>
 			<AnimatePresence>
 				{cards.map((card, i) => (
 					<Card

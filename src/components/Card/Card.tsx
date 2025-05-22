@@ -26,8 +26,8 @@ const Card = function ({ card, rotation, isHinted, isActive = false, handleClick
 				if (!isHinted) handleClick();
 			}}
 			layout={!shouldReduceMotion}
-			initial={{ rotate: rotation || 0 }}
-			animate={{ rotate: rotation || 0 }}
+			initial={{ rotate: !isActive ? 0 : rotation || 0 }}
+			animate={{ rotate: !isActive ? 0 : rotation || 0 }}
 			transition={
 				shouldReduceMotion ? { duration: 0 } : { type: "spring", stiffness: 400, damping: 60 }
 			}
