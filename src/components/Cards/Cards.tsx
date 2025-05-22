@@ -30,9 +30,9 @@ const Cards = ({ cards, onCardClick, hintedCodes, isPlaying }: Props) => {
 						key={card.code}
 						card={card}
 						rotation={rotations[i % rotations.length]}
-						hinted={hintedCodes.includes(card.code)}
+						isHinted={hintedCodes.includes(card.code)}
 						isActive={isPlaying}
-						onClick={() => {
+						handleClick={() => {
 							onCardClick(card.code);
 							toggleRotations();
 						}}

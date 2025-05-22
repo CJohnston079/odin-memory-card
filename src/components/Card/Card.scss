@@ -23,6 +23,8 @@
   transition-property: opacity;
   transition-duration: 200ms;
 
+  cursor: pointer;
+
   &__image {
     transform: scale(1.05);
   }
@@ -30,7 +32,7 @@
   &--hinted {
     opacity: 0.3;
     transition-duration: 800ms;
-    pointer-events: none;
+    cursor: not-allowed;
   }
 
   &--inactive {

@@ -92,7 +92,13 @@ const Game = () => {
 					)}
 				</section>
 				<footer className="game__footer">
-					<Controls score={state.score} setShowHint={showHint} endGame={endGame} />
+					<Controls
+						score={state.score}
+						highScore={state.highScore}
+						isHintShowing={state.showHint}
+						setShowHint={showHint}
+						endGame={endGame}
+					/>
 				</footer>
 			</div>
 		</>

@@ -19,12 +19,21 @@
     background-color: transparent;
 		border-radius: 8px;
 
+    transition-property: opacity;
+    transition-duration: 200ms;
+
 		&--button {
 			display: block;
       position: relative;
       width: 140px;
       border: none;
 		}
+
+    &--inactive {
+      transition-duration: 800ms;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 	}
 
 	&__score-value {

@@ -2,11 +2,13 @@ import "./Controls.scss";
 
 type Props = {
 	score: number;
+	highScore: number;
+	isHintShowing: boolean;
 	setShowHint: React.Dispatch<React.SetStateAction<boolean>>;
 	endGame: () => void;
 };
 
-const Conrols = ({ score, setShowHint, endGame }: Props) => {
+const Conrols = ({ score, highScore, isHintShowing, setShowHint, endGame }: Props) => {
 	const block = "controls";
 
 	return (
@@ -21,15 +23,19 @@ const Conrols = ({ score, setShowHint, endGame }: Props) => {
 				</button>
 				<button
 					type="button"
-					className={`${block}__list-item ${block}__list-item--button`}
-					onClick={() => setShowHint(true)}
+					className={`${block}__list-item ${block}__list-item--button ${
+						isHintShowing || score === 0 ? `${block}__list-item--inactive` : ""
+					}`}
+					onClick={() => {
+						if (!isHintShowing && score > 0) setShowHint(true);
+					}}
 				>
 					Hint
 				</button>
 			</ul>
 			<ul className={`${block}__list ${block}__list--score`}>
 				<output className={`${block}__list-item ${block}__list-item--score`}>
-					Highest score: <span className={`${block}__score-value`}>{score}</span>
+					Highest score: <span className={`${block}__score-value`}>{highScore}</span>
 				</output>
 				<output className={`${block}__list-item ${block}__list-item--score`}>
 					Score: <span className={`${block}__score-value`}>{score}</span>
