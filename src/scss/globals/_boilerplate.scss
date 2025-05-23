@@ -16,8 +16,10 @@ main {
 }
 
 button {
-	font-family: inherit;
   border: none;
+	font-family: inherit;
+  color: inherit;
+  background-color: inherit;
 	cursor: pointer;
   
 	&:focus,

@@ -3,12 +3,13 @@ import "./Controls.scss";
 type Props = {
 	score: number;
 	highScore: number;
+	isPlaying: boolean;
 	isHintShowing: boolean;
 	setShowHint: React.Dispatch<React.SetStateAction<boolean>>;
 	endGame: () => void;
 };
 
-const Conrols = ({ score, highScore, isHintShowing, setShowHint, endGame }: Props) => {
+const Controls = ({ score, highScore, isPlaying, isHintShowing, setShowHint, endGame }: Props) => {
 	const block = "controls";
 
 	return (
@@ -16,7 +17,9 @@ const Conrols = ({ score, highScore, isHintShowing, setShowHint, endGame }: Prop
 			<ul className={`${block}__list ${block}__list--buttons`}>
 				<button
 					type="button"
-					className={`${block}__list-item ${block}__list-item--button`}
+					className={`${block}__list-item ${block}__list-item--button ${
+						!isPlaying ? `${block}__list-item--inactive` : ""
+					}`}
 					onClick={() => endGame()}
 				>
 					Retire
@@ -24,7 +27,7 @@ const Conrols = ({ score, highScore, isHintShowing, setShowHint, endGame }: Prop
 				<button
 					type="button"
 					className={`${block}__list-item ${block}__list-item--button ${
-						isHintShowing || score === 0 ? `${block}__list-item--inactive` : ""
+						isHintShowing || !isPlaying || score === 0 ? `${block}__list-item--inactive` : ""
 					}`}
 					onClick={() => {
 						if (!isHintShowing && score > 0) setShowHint(true);
@@ -45,4 +48,4 @@ const Conrols = ({ score, highScore, isHintShowing, setShowHint, endGame }: Prop
 	);
 };
 
-export default Conrols;
+export default Controls;

@@ -20,10 +20,18 @@
 
   box-shadow: 2px 2px 1px hsl(140, 80%, 10%, 0.5);
 
-  transition-property: opacity;
-  transition-duration: 200ms;
+  transition-property: opacity, box-shadow, scale;
+  transition-duration: 600ms;
 
   cursor: pointer;
+  
+  &:hover {
+    box-shadow: 
+      2px 2px 1px hsl(140, 80%, 10%, 0.5),
+      0 0 16px hsl(140, 80%, 10%, 0.5);
+    scale: 1.02;
+    transition-duration: 200ms;
+  }
 
   &__image {
     transform: scale(1.05);
@@ -32,7 +40,7 @@
   &--hinted {
     opacity: 0.3;
     transition-duration: 800ms;
-    cursor: not-allowed;
+    pointer-events: none;
   }
 
   &--inactive {

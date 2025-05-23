@@ -8,7 +8,11 @@
 	&__list {
 		display: flex;
     flex-wrap: wrap;
-		gap: u.rem(16);
+    align-items: center;
+
+    &--buttons {
+      column-gap: u.rem(16);
+    }
 	}
 
 	&__list-item {
@@ -17,20 +21,30 @@
 		text-align: center;
     text-wrap: nowrap;
 
-		color: var(--cl-secondary);
-    background-color: transparent;
-		border-radius: 8px;
-
-    transition-property: opacity;
-    transition-duration: 200ms;
-
 		&--button {
 			display: block;
+      width: 7ch;
+      background-color: var(--cl-tertiary);
+      background-size: cover;
+      border-radius: 2px;
+
+      transition-property: box-shadow, background-color, opacity;
+      transition-duration: 1200ms;
+
+      &:hover {
+        box-shadow: 4px 4px 4px hsl(140, 80%, 0%, 0.3) inset;
+        transition-duration: 300ms;
+      }
 		}
 
     &--inactive {
-      transition-duration: 800ms;
+      box-shadow: 4px 4px 4px hsl(140, 80%, 0%, 0.8) inset;
+      background-color: hsl(140, 80%, 0%, 0.2);
       opacity: 0.5;
+
+      transition-duration: 800ms;
+
+      pointer-events: none;
       cursor: not-allowed;
     }
 	}

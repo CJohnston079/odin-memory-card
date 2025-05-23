@@ -100,6 +100,7 @@ const Game = () => {
 					<Controls
 						score={state.score}
 						highScore={state.highScore}
+						isPlaying={state.isPlaying}
 						isHintShowing={state.showHint}
 						setShowHint={showHint}
 						endGame={endGame}
