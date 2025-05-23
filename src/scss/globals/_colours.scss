@@ -2,9 +2,9 @@
 @use "../util/generate-colour" as colour;
 
 :root {
-	@include colour.generate("primary", 237, 100%, 70%, $tint-multiplier: 1.3);
-	@include colour.generate("secondary", 237, 100%, 70%, $tint-multiplier: 1.3);
-	@include colour.generate("tertiary", 193, 95%, 68%, $tint-multiplier: 1.3);
+	@include colour.generate("primary", 140, 80%, 35%, $tint-multiplier: 1.3);
+	@include colour.generate("secondary", 55, 96%, 80%, $tint-multiplier: 1.3);
+	@include colour.generate("tertiary", 205, 80%, 22%, $tint-multiplier: 1.3);
 	@include colour.generate("success", 140, 100%, 50%);
 	@include colour.generate("warning", 50, 90%, 50%);
 	@include colour.generate("error", 10, 70%, 60%);

@@ -2,36 +2,50 @@ import "./Controls.scss";
 
 type Props = {
 	score: number;
+	highScore: number;
+	isPlaying: boolean;
+	isHintShowing: boolean;
 	setShowHint: React.Dispatch<React.SetStateAction<boolean>>;
 	endGame: () => void;
 };
 
-const Conrols = ({ score, setShowHint, endGame }: Props) => {
+const Controls = ({ score, highScore, isPlaying, isHintShowing, setShowHint, endGame }: Props) => {
 	const block = "controls";
 
 	return (
 		<nav className={`${block}`}>
-			<div className={`${block}__buttons`}>
+			<ul className={`${block}__list ${block}__list--buttons`}>
 				<button
 					type="button"
-					className={`${block}__item ${block}__item--button`}
+					className={`${block}__list-item ${block}__list-item--button ${
+						!isPlaying ? `${block}__list-item--inactive` : ""
+					}`}
 					onClick={() => endGame()}
 				>
-					End game
+					Retire
 				</button>
 				<button
 					type="button"
-					className={`${block}__item ${block}__item--button`}
-					onClick={() => setShowHint(true)}
+					className={`${block}__list-item ${block}__list-item--button ${
+						isHintShowing || !isPlaying || score === 0 ? `${block}__list-item--inactive` : ""
+					}`}
+					onClick={() => {
+						if (!isHintShowing && score > 0) setShowHint(true);
+					}}
 				>
 					Hint
 				</button>
-			</div>
-			<output className={`${block}__item ${block}__item--score`}>
-				Score: <span className={`${block}__score-value`}>{score}</span>
-			</output>
+			</ul>
+			<ul className={`${block}__list ${block}__list--score`}>
+				<output className={`${block}__list-item ${block}__list-item--score`}>
+					Highest score: <span className={`${block}__score-value`}>{highScore}</span>
+				</output>
+				<output className={`${block}__list-item ${block}__list-item--score`}>
+					Score: <span className={`${block}__score-value`}>{score}</span>
+				</output>
+			</ul>
 		</nav>
 	);
 };
 
-export default Conrols;
+export default Controls;

@@ -1,35 +1,40 @@
+@use "@/scss/util" as u;
+
 body {
   margin: 0;
-	background-color: var(--background-primary-shade);
+  background-image: (
+    radial-gradient(hsl(140, 80%, 30%, 0.8) 20%,  hsl(140, 80%, 20%, 0.8) 85%, hsl(140, 80%, 10%, 0.7)),
+    url("@/assets/images/background.webp"),
+    linear-gradient(#067971)
+  );
+  background-size: cover;
 }
 
-
 main {
-  min-height: 100vh;
-  grid-template-rows: auto auto 1fr;
+  height: 100vh;
+  height: 100dvh;
 }
 
 button {
-	border-radius: 8px;
-	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
-
-	font-size: 1em;
-	font-weight: 500;
+  border: none;
 	font-family: inherit;
-
-	background-color: var(--background-primary-shade);
-
-	transition: border-color 0.25s;
-
+  color: inherit;
+  background-color: inherit;
 	cursor: pointer;
-
-	&:hover {
-		border-color: var(--cl-primary);
-	}
-
+  
 	&:focus,
 	&:focus-visible {
 		outline: 4px auto -webkit-focus-ring-color;
 	}
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
 }

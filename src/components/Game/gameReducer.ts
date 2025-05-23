@@ -6,6 +6,7 @@ export type GameState = {
 	loading: boolean;
 	error: string | null;
 	score: number;
+	highScore: number;
 	showHint: boolean;
 	chosenCards: string[];
 	isPlaying: boolean;
@@ -25,6 +26,7 @@ export const initialState: GameState = {
 	loading: true,
 	error: null,
 	score: 0,
+	highScore: 0,
 	showHint: false,
 	chosenCards: [],
 	isPlaying: true,
@@ -46,8 +48,16 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
 				showHint: false,
 				isPlaying: true,
 			};
-		case "END_GAME":
-			return { ...state, isPlaying: false, showHint: false };
+		case "END_GAME": {
+			const updatedHighScore = state.score > state.highScore ? state.score : state.highScore;
+
+			return {
+				...state,
+				highScore: updatedHighScore,
+				isPlaying: false,
+				showHint: false,
+			};
+		}
 		case "NEXT_ROUND": {
 			const updatedChosen = [...state.chosenCards, action.code];
 			const updatedScore = state.score + 1;

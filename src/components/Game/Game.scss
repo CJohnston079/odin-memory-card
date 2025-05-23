@@ -1,0 +1,57 @@
+@use "@/scss/util" as u;
+
+.game {
+  margin-block: u.rem(32);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: u.rem(32);
+
+  &__header,
+  &__footer {
+    box-sizing: border-box;
+    border: solid 3px var(--cl-secondary);
+    padding: u.rem(16);
+    border-radius: 4px;
+  }
+
+  &__heading {
+    @include u.breakpoint(small) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      text-wrap: nowrap;
+      
+      &::before,
+      &::after {
+        display: inline-block;
+        margin-inline: u.rem(16);
+        text-wrap: nowrap;
+      }
+      
+      &::before {
+        content: "♣ • ♦";
+      }
+      
+      &::after {
+        content: "♦ • ♣";
+      }
+    }
+
+    @include u.breakpoint(large) {
+      &::before {
+        content: "♣ • ♦ • ♥ • ♠";
+      }
+      
+      &::after {
+        content: "♠ • ♥ • ♦ • ♣";
+      }
+    }
+  }
+  
+  &__main {
+    flex: 1;
+    position: relative;
+  }
+}

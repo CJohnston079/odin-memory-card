@@ -5,30 +5,48 @@
 	justify-content: space-between;
 	gap: u.rem(16);
 
-	margin-block-end: u.rem(48);
-
-	&__buttons {
+	&__list {
 		display: flex;
-		gap: u.rem(16);
+    flex-wrap: wrap;
+    align-items: center;
+
+    &--buttons {
+      column-gap: u.rem(16);
+    }
 	}
 
-	&__item {
-		border-style: solid;
-		border-width: 1px;
+	&__list-item {
 		padding: u.rem(8) u.rem(16);
 
 		text-align: center;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-
-		color: var(--text-primary);
-		background-color: var(--background-primary);
-		border-color: var(--foreground-tint);
-		border-radius: 8px;
+    text-wrap: nowrap;
 
 		&--button {
 			display: block;
+      width: 7ch;
+      background-color: var(--cl-tertiary);
+      background-size: cover;
+      border-radius: 2px;
+
+      transition-property: box-shadow, background-color, opacity;
+      transition-duration: 1200ms;
+
+      &:hover {
+        box-shadow: 4px 4px 4px hsl(140, 80%, 0%, 0.3) inset;
+        transition-duration: 300ms;
+      }
 		}
+
+    &--inactive {
+      box-shadow: 4px 4px 4px hsl(140, 80%, 0%, 0.8) inset;
+      background-color: hsl(140, 80%, 0%, 0.2);
+      opacity: 0.5;
+
+      transition-duration: 800ms;
+
+      pointer-events: none;
+      cursor: not-allowed;
+    }
 	}
 
 	&__score-value {

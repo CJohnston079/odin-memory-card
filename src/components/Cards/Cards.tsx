@@ -12,29 +12,30 @@ type Props = {
 	isPlaying: boolean;
 };
 
-const rotationsA = [-10, 2, 7, -2, 3, -1, -6, 2, -9, -2, 1, 8];
-const rotationsB = [5, -2, -7, 2, -3, 1, 6, -2, 9, 2, -1, -8];
+const generateRotations = (count: number, min = -4, max = 4) => {
+	return Array.from({ length: count }, () => Math.floor(Math.random() * (max - min + 1)) + min);
+};
 
 const Cards = ({ cards, onCardClick, hintedCodes, isPlaying }: Props) => {
-	const [rotations, setRotations] = useState(rotationsA);
+	const [rotations, setRotations] = useState(() => generateRotations(cards.length));
 
-	const toggleRotations = () => {
-		setRotations(prev => (prev === rotationsA ? rotationsB : rotationsA));
+	const regenerateRotations = () => {
+		setRotations(generateRotations(cards.length));
 	};
 
 	return (
-		<div className="cards">
+		<div className={`cards ${!isPlaying ? "cards--inactive" : ""}`}>
 			<AnimatePresence>
 				{cards.map((card, i) => (
 					<Card
 						key={card.code}
 						card={card}
 						rotation={rotations[i % rotations.length]}
-						hinted={hintedCodes.includes(card.code)}
+						isHinted={hintedCodes.includes(card.code)}
 						isActive={isPlaying}
-						onClick={() => {
+						handleClick={() => {
 							onCardClick(card.code);
-							toggleRotations();
+							regenerateRotations();
 						}}
 					/>
 				))}

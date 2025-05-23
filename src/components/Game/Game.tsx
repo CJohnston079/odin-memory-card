@@ -3,11 +3,12 @@ import { AnimatePresence } from "framer-motion";
 
 import Controls from "@/components/Controls";
 import Cards from "@/components/Cards";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import Loader from "@/components/Loader";
 import Menu from "@/components/Menu";
 
 import { getNewDeck } from "@/services/deckService";
 import { gameReducer, initialState } from "./gameReducer";
+
 import "./Game.scss";
 
 const NEW_DECK_API = import.meta.env.VITE_CMS_NEW_DECK_API;
@@ -69,22 +70,43 @@ const Game = () => {
 
 	return (
 		<>
-			<AnimatePresence>
-				{!state.isPlaying && <Menu score={state.score} startNewGame={startGame} />}
-			</AnimatePresence>
-			<Controls score={state.score} setShowHint={showHint} endGame={endGame} />
-			{state.error ? (
-				<p>{state.error}</p>
-			) : state.loading ? (
-				<LoadingSpinner />
-			) : (
-				<Cards
-					cards={state.cards}
-					onCardClick={handleCardClick}
-					hintedCodes={getHintedCodes(state.chosenCards, state.showHint)}
-					isPlaying={state.isPlaying}
-				/>
-			)}
+			<div className="game">
+				<header className="game__header">
+					<h1 className="game__heading">Memory card</h1>
+				</header>
+				<section className="game__main">
+					<AnimatePresence mode="wait">
+						{state.loading ? (
+							<Loader key="loading" />
+						) : state.error ? (
+							<p key="error">{state.error}</p>
+						) : (
+							<>
+								{!state.isPlaying && (
+									<Menu key="menu" score={state.score} startNewGame={startGame} />
+								)}
+								<Cards
+									key="cards"
+									cards={state.cards}
+									onCardClick={handleCardClick}
+									hintedCodes={getHintedCodes(state.chosenCards, state.showHint)}
+									isPlaying={state.isPlaying}
+								/>
+							</>
+						)}
+					</AnimatePresence>
+				</section>
+				<footer className="game__footer">
+					<Controls
+						score={state.score}
+						highScore={state.highScore}
+						isPlaying={state.isPlaying}
+						isHintShowing={state.showHint}
+						setShowHint={showHint}
+						endGame={endGame}
+					/>
+				</footer>
+			</div>
 		</>
 	);
 };

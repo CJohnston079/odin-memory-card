@@ -1,31 +1,40 @@
 @use "@/scss/util" as u;
 
 .card {
-	--multiplier: 1.2;
-	--card-height: calc(var(--multiplier) * 89px);
-	--card-width: calc(var(--multiplier) * 64px);
+  box-sizing: border-box;
 
-	width: var(--card-width);
-	height: var(--card-height);
-	max-width: 300px;
+  min-width: 80px;
+  max-width: 160px;
+  width: clamp(80px, 2.75rem + min(10vw, 10vh), 160px);
 
-	color: black;
-
-  transition-property: opacity;
-  transition-duration: 200ms;
-
+  border-style: solid;
+  border-width: 8px;
+  border-width: clamp(4px, 0.1375rem + 0.5vw, 8px);
+  
+  border-radius: 12px;
+  border-radius: clamp(4px, 0.1375rem + 0.5vw, 8px);
 	overflow: hidden;
 
-	@include u.breakpoint(medium) {
-		--multiplier: 1.8;
-	}
+  background-color: white;
+  border-color: white;
 
-	@include u.breakpoint(large) {
-		--multiplier: 2.4;
-	}
+  box-shadow: 2px 2px 1px hsl(140, 80%, 10%, 0.5);
+
+  transition-property: opacity, box-shadow, scale;
+  transition-duration: 600ms;
+
+  cursor: pointer;
+  
+  &:hover {
+    box-shadow: 
+      2px 2px 1px hsl(140, 80%, 10%, 0.5),
+      0 0 16px hsl(140, 80%, 10%, 0.5);
+    scale: 1.02;
+    transition-duration: 200ms;
+  }
 
   &__image {
-    width: 100%;
+    transform: scale(1.05);
   }
 
   &--hinted {
