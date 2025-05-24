@@ -61,6 +61,10 @@ const Game = () => {
 			dispatch({ type: "END_GAME" });
 		} else {
 			dispatch({ type: "NEXT_ROUND", code });
+
+			if (state.chosenCards.length + 1 === state.cards.length) {
+				dispatch({ type: "END_GAME" });
+			}
 		}
 	};
 
